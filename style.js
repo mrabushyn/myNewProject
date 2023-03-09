@@ -20,9 +20,12 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   input: {
-    width: 220,
-    marginTop: 16,
-    borderWidth: 2,
-    borderColor: "lightblue",
+    width: 200,
+    height: 44,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "black",
+    marginBottom: 10,
+    marginTop: 10,
   },
 });
