@@ -20,6 +20,14 @@ const inputHandler = (text) => setValue(text)
       onChangeText={inputHandler}
       >
       </TextInput>
+      <TextInput 
+      autoFocus
+      style={styles.input}
+      placeholder="Type text"
+      value={value}
+      onChangeText={inputHandler}
+      >
+      </TextInput>
       <StatusBar style="auto" />
     </View>
   );
