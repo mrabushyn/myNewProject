@@ -3,72 +3,85 @@ import { StyleSheet, Platform } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: "center",
     // Використання модуля платформи
-    ...Platform.select({
-      ios: {
-        backgroundColor: "#000000",
-      },
-      android: {
-        backgroundColor: "#ffffff",
-      },
-    }),
+    // ...Platform.select({
+    //   ios: {
+    //     backgroundColor: "#000000",
+    //   },
+    //   android: {
+    //     backgroundColor: "#ffffff",
+    //   },
+    // }),
   },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "flex-end",
+  },
+
+  whiteBox: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    flex: 0.69,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+  },
+
+  form: {
+    flex: 1,
+    marginHorizontal: 16,
+    marginTop: 92,
+  },
+
   title: {
     marginBottom: 33,
-    // paddingVertical: 8,
     color: "#212121",
-    // textAlign: "center",
+    textAlign: "center",
     fontSize: 30,
     fontWeight: 500,
   },
   input: {
-    width: 343,
     height: 50,
     padding: 16,
     borderWidth: 1,
     borderColor: "#E8E8E8",
     borderRadius: 8,
     marginBottom: 16,
-    marginTop: 10,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#F6F6F6",
     fontSize: 16,
     lineHeight: 19,
   },
-  button: {
-    width: 250,
-    height: 44,
-    borderWidth: 1,
-    backgroundColor: "#FF6C00",
-    marginBottom: 10,
-    marginTop: 16,
-    textAlign: "center",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  image: {
-    flex: 1,
-    resizeMode: "cover",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  box: {
-    // flex: 1,
-    position: "absolute",
-    width: "100%",
-    height: 549,
-    bottom: 0,
-    // padding: 70,
-    // paddingBottom: 190,
 
-    backgroundColor: "#fff",
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    // resizeMode: "cover",
-    justifyContent: "center",
+  button: {
+    height: 51,
+    borderRadius: 100,
+    marginHorizontal: 16,
+    backgroundColor: "#FF6C00",
     alignItems: "center",
+    justifyContent: "center",
+    marginTop: 43,
+  },
+
+  btnTitle: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: 400,
+  },
+
+  secureBtn: {
+    position: "absolute",
+    bottom: "50%",
+    right: 16,
+  },
+
+  secureBtnTitle: {
+    color: "#1B4371",
+    fontSize: 16,
+    fontWeight: 400,
   },
 });
 

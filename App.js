@@ -1,11 +1,14 @@
 import React from "react";
-import { StatusBar } from "expo-status-bar";
 import {
   View,
   ImageBackground,
   TouchableWithoutFeedback, // імпорт компонента обгортки
   Keyboard,
+  Platform,
+  KeyboardAvoidingView,
 } from "react-native";
+import { StatusBar } from "expo-status-bar";
+
 import RegistrationScreen from "./screens/RegistrationScreen";
 import { styles } from "./style";
 
