@@ -7,7 +7,6 @@ import {
   Alert,
   TouchableOpacity,
   Keyboard,
-  Image,
 } from "react-native";
 import { styles } from "../style";
 
@@ -18,7 +17,6 @@ export default RegistrationScreen = () => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [secureTextEntryName, setSecureTextEntryName] = useState("Показати");
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
-  const [imageLoader, setImageLoader] = useState(false);
 
   const inputNameRef = useRef(null);
   const inputEmailRef = useRef(null);
@@ -30,8 +28,6 @@ export default RegistrationScreen = () => {
     });
   };
 
-  console.log(imageLoader);
-
   const handleBlur = (ref) => {
     ref.current.setNativeProps({
       style: styles.input,
@@ -39,7 +35,7 @@ export default RegistrationScreen = () => {
   };
 
   const onLogin = () => {
-    Alert.alert("Credentials", `${name} + ${email} + ${password}`);
+    Alert.alert("Credentials", `${email} + ${password}`);
   };
 
   const passwordSecureBtn = () => {
@@ -58,82 +54,19 @@ export default RegistrationScreen = () => {
     setIsShowKeyboard(false);
   });
 
-  const handleImageUpload = () => {
-    setImageLoader(true);
-  };
-
-  const handleImageDelete = () => {
-    setImageLoader(false);
-  };
-
-  // useEffect(() => {}, []);
-
   return (
     <View style={styles.whiteBox}>
-      {!imageLoader && (
-        <>
-          <View style={styles.photoBox}>
-            <Image source={require("./images/Empty.png")} />
-          </View>
-          <TouchableOpacity
-            onPress={handleImageUpload}
-            activeOpacity={0.8}
-            style={styles.changePhotoBtn}
-          >
-            <Image
-              style={{ ...styles.changeIconBtn, width: 25, height: 25 }}
-              source={require("../screens/images/addPhoto.png")}
-            />
-          </TouchableOpacity>
-        </>
-      )}
-      {imageLoader && (
-        <>
-          <View style={styles.photoBox}>
-            <Image source={require("./images/Rectangle_22.png")} />
-          </View>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={handleImageDelete}
-            style={styles.changePhotoBtn}
-          >
-            <Image
-              style={{
-                ...styles.changeIconBtn,
-                width: 25,
-                height: 25,
-              }}
-              source={require("../screens/images/3.png")}
-            />
-          </TouchableOpacity>
-        </>
-      )}
       <KeyboardAvoidingView
         behavior={Platform.OS === "android" ? "padding" : "height"}
       >
         <View
           style={{
             ...styles.form,
-            marginBottom: isShowKeyboard ? 2 : 92,
-            marginTop: isShowKeyboard ? 62 : 92,
+            marginBottom: isShowKeyboard ? 32 : 92,
+            marginTop: isShowKeyboard ? 76 : 92,
           }}
         >
-          <Text style={styles.title}>Реєстрація</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Логін"
-            placeholderTextColor="#BDBDBD"
-            value={name}
-            onChangeText={(text) => setName(text)}
-            onFocus={() => {
-              setIsShowKeyboard(true);
-              handleFocus(inputNameRef);
-            }}
-            onBlur={() => {
-              handleBlur(inputNameRef);
-            }}
-            ref={inputNameRef}
-          ></TextInput>
+          <Text style={styles.title}>Увійти</Text>
           <TextInput
             style={styles.input}
             placeholder="Адреса електронної пошти"
@@ -181,14 +114,14 @@ export default RegistrationScreen = () => {
                 onPress={onLogin}
                 activeOpacity={0.7}
               >
-                <Text style={styles.btnTitle}>Зареєструватися</Text>
+                <Text style={styles.btnTitle}>Увійти</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.logRegTogglePageBox}
                 activeOpacity={0.7}
               >
                 <Text style={styles.logRegTogglePageText}>
-                  Вже є акаунт? Увійти
+                  Немає акаунту? Зареєструватися
                 </Text>
               </TouchableOpacity>
             </>

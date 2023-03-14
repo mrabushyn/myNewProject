@@ -32,7 +32,6 @@ export const styles = StyleSheet.create({
   form: {
     flex: 1,
     marginHorizontal: 16,
-    // marginTop: 62,
   },
 
   title: {
@@ -66,6 +65,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 43,
+    marginBottom: 16,
   },
 
   btnTitle: {
@@ -86,6 +86,21 @@ export const styles = StyleSheet.create({
     fontWeight: 400,
   },
 
+  logRegTogglePageBox: {
+    color: "#1B4371",
+    fontSize: 16,
+    fontWeight: 400,
+    paddingBottom: 20,
+
+    alignItems: "center",
+  },
+
+  logRegTogglePageText: {
+    color: "#1B4371",
+    fontSize: 16,
+    fontWeight: 400,
+  },
+
   photoBox: {
     position: "absolute",
     width: 120,
@@ -93,15 +108,12 @@ export const styles = StyleSheet.create({
     left: "50%",
     top: -60,
     marginLeft: -60,
-    // paddingTop: 150,
   },
 
   changePhotoBtn: {
     width: 50,
     height: 50,
     marginLeft: "60%",
-    // marginTop: "0%",
-    // marginBottom: -52,
     padding: 10,
     // backgroundColor: "#FF6C00",
   },
