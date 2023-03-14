@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Text,
   View,
@@ -6,6 +6,8 @@ import {
   KeyboardAvoidingView,
   Alert,
   TouchableOpacity,
+  Keyboard,
+  Image,
 } from "react-native";
 import { styles } from "../style";
 
@@ -16,10 +18,25 @@ export default RegistrationScreen = () => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [secureTextEntryName, setSecureTextEntryName] = useState("Показати");
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+  const [imageLoader, setImageLoader] = useState(false);
 
-  const nameHandler = (text) => setName(text);
-  const passwordHandler = (text) => setPassword(text);
-  const emailHandler = (text) => setEmail(text);
+  const inputNameRef = useRef(null);
+  const inputEmailRef = useRef(null);
+  const inputPassRef = useRef(null);
+
+  const handleFocus = (ref) => {
+    ref.current.setNativeProps({
+      style: { ...styles.input, borderColor: "#FF6C00" },
+    });
+  };
+
+  console.log(imageLoader);
+
+  const handleBlur = (ref) => {
+    ref.current.setNativeProps({
+      style: styles.input,
+    });
+  };
 
   const onLogin = () => {
     Alert.alert("Credentials", `${name} + ${email} + ${password}`);
@@ -37,14 +54,69 @@ export default RegistrationScreen = () => {
     return;
   };
 
+  Keyboard.addListener("keyboardDidHide", () => {
+    setIsShowKeyboard(false);
+  });
+
+  const handleImageUpload = () => {
+    setImageLoader(true);
+  };
+
+  const handleImageDelete = () => {
+    setImageLoader(false);
+  };
+
+  // useEffect(() => {}, []);
+
   return (
     <View style={styles.whiteBox}>
+      {!imageLoader && (
+        <>
+          <View style={styles.photoBox}>
+            <Image source={require("./images/Empty.png")} />
+          </View>
+          <TouchableOpacity
+            onPress={handleImageUpload}
+            activeOpacity={0.8}
+            style={styles.changePhotoBtn}
+          >
+            <Image
+              style={{ ...styles.changeIconBtn, width: 25, height: 25 }}
+              source={require("../screens/images/addPhoto.png")}
+            />
+          </TouchableOpacity>
+        </>
+      )}
+      {imageLoader && (
+        <>
+          <View style={styles.photoBox}>
+            <Image source={require("./images/Rectangle_22.png")} />
+          </View>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={handleImageDelete}
+            style={styles.changePhotoBtn}
+          >
+            <Image
+              style={{
+                ...styles.changeIconBtn,
+                width: 25,
+                height: 25,
+              }}
+              source={require("../screens/images/3.png")}
+            />
+          </TouchableOpacity>
+        </>
+      )}
       <KeyboardAvoidingView
         behavior={Platform.OS === "android" ? "padding" : "height"}
-        // style={styles.keyboardAvoidingView}
       >
         <View
-          style={{ ...styles.form, marginBottom: isShowKeyboard ? 32 : 92 }}
+          style={{
+            ...styles.form,
+            marginBottom: isShowKeyboard ? 2 : 92,
+            marginTop: isShowKeyboard ? 62 : 92,
+          }}
         >
           <Text style={styles.title}>Реєстрація</Text>
           <TextInput
@@ -52,20 +124,30 @@ export default RegistrationScreen = () => {
             placeholder="Логін"
             placeholderTextColor="#BDBDBD"
             value={name}
-            onChangeText={nameHandler}
+            onChangeText={(text) => setName(text)}
             onFocus={() => {
-              setIsShowKeyboard(false);
+              setIsShowKeyboard(true);
+              handleFocus(inputNameRef);
             }}
+            onBlur={() => {
+              handleBlur(inputNameRef);
+            }}
+            ref={inputNameRef}
           ></TextInput>
           <TextInput
             style={styles.input}
             placeholder="Адреса електронної пошти"
             placeholderTextColor="#BDBDBD"
             value={email}
-            onChangeText={emailHandler}
+            onChangeText={(text) => setEmail(text)}
             onFocus={() => {
               setIsShowKeyboard(true);
+              handleFocus(inputEmailRef);
             }}
+            onBlur={() => {
+              handleBlur(inputEmailRef);
+            }}
+            ref={inputEmailRef}
           ></TextInput>
           <View style={{ paddingBottom: 0 }}>
             <TextInput
@@ -74,10 +156,15 @@ export default RegistrationScreen = () => {
               placeholderTextColor="#BDBDBD"
               secureTextEntry={secureTextEntry}
               value={password}
-              onChangeText={passwordHandler}
+              onChangeText={(text) => setPassword(text)}
               onFocus={() => {
                 setIsShowKeyboard(true);
+                handleFocus(inputPassRef);
               }}
+              onBlur={() => {
+                handleBlur(inputPassRef);
+              }}
+              ref={inputPassRef}
             ></TextInput>
             <TouchableOpacity
               style={styles.secureBtn}

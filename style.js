@@ -32,16 +32,18 @@ export const styles = StyleSheet.create({
   form: {
     flex: 1,
     marginHorizontal: 16,
-    marginTop: 92,
+    // marginTop: 62,
   },
 
   title: {
     marginBottom: 33,
+    marginTop: -50,
     color: "#212121",
     textAlign: "center",
     fontSize: 30,
     fontWeight: 500,
   },
+
   input: {
     height: 50,
     padding: 16,
@@ -83,18 +85,31 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 400,
   },
+
+  photoBox: {
+    position: "absolute",
+    width: 120,
+    height: 120,
+    left: "50%",
+    top: -60,
+    marginLeft: -60,
+    // paddingTop: 150,
+  },
+
+  changePhotoBtn: {
+    width: 50,
+    height: 50,
+    marginLeft: "60%",
+    // marginTop: "0%",
+    // marginBottom: -52,
+    padding: 10,
+    // backgroundColor: "#FF6C00",
+  },
+
+  changeIconBtn: {
+    width: 25,
+    height: 25,
+    zIndex: 2,
+    marginBottom: "-10%",
+  },
 });
-
-// Використання платформо-залежних розширень файлів
-// Коли ваш код для платформи складніший, ви повинні розглянути можливість поділу коду на окремі файли. React Native виявить, коли файл має .ios. або .android. розширення, і завантажить відповідний файл платформи, коли це буде потрібно.
-
-// Наприклад, скажімо, у вас є наступні файли у вашому проекті:
-
-// BigButton.ios.js
-// BigButton.android.js
-
-// Потім ви можете імпортувати компонент кнопки наступним чином:
-
-// import BigButton from './BigButton';
-
-// React Native автоматично підбере потрібний файл, залежно від діючої платформи.

@@ -2,10 +2,8 @@ import React from "react";
 import {
   View,
   ImageBackground,
-  TouchableWithoutFeedback, // імпорт компонента обгортки
+  TouchableWithoutFeedback,
   Keyboard,
-  Platform,
-  KeyboardAvoidingView,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
