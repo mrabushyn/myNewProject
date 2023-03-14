@@ -90,8 +90,7 @@ export const styles = StyleSheet.create({
     color: "#1B4371",
     fontSize: 16,
     fontWeight: 400,
-    paddingBottom: 20,
-
+    // paddingBottom: 20,
     alignItems: "center",
   },
 
@@ -121,7 +120,21 @@ export const styles = StyleSheet.create({
   changeIconBtn: {
     width: 25,
     height: 25,
-    zIndex: 2,
+    // zIndex: 2,
     marginBottom: "-10%",
+  },
+
+  navigate: {
+    borderWidth: 1,
+    position: "absolute",
+    left: "20%",
+    top: 50,
+    marginLeft: -25,
+    borderColor: "#E8E8E8",
+    backgroundColor: "#FF6C00",
+    width: 50,
+    height: 50,
+    alignContent: "center",
+    justifyContent: "center",
   },
 });

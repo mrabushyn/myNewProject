@@ -117,7 +117,7 @@ export default RegistrationScreen = () => {
                 <Text style={styles.btnTitle}>Увійти</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={styles.logRegTogglePageBox}
+                style={{ ...styles.logRegTogglePageBox, paddingBottom: 20 }}
                 activeOpacity={0.7}
               >
                 <Text style={styles.logRegTogglePageText}>
