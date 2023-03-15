@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import {
   Text,
   View,
@@ -9,16 +9,30 @@ import {
   Keyboard,
   Image,
 } from "react-native";
+import { AppLoading } from "expo";
+import * as Font from "expo-font";
 import { styles } from "../style";
 
+const initialState = {
+  name: "",
+  email: "",
+  password: "",
+};
+
+const loadFonts = async () => {
+  await Font.loadAsync({
+    "Roboto-Medium": require("../assets/fonts/Roboto-Medium.ttf"),
+    "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
+  });
+};
+
 export default RegistrationScreen = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [state, setState] = useState(initialState);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [secureTextEntryName, setSecureTextEntryName] = useState("Показати");
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [imageLoader, setImageLoader] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   const inputNameRef = useRef(null);
   const inputEmailRef = useRef(null);
@@ -30,8 +44,6 @@ export default RegistrationScreen = () => {
     });
   };
 
-  console.log(imageLoader);
-
   const handleBlur = (ref) => {
     ref.current.setNativeProps({
       style: styles.input,
@@ -39,7 +51,11 @@ export default RegistrationScreen = () => {
   };
 
   const onLogin = () => {
-    Alert.alert("Credentials", `${name} + ${email} + ${password}`);
+    Alert.alert(
+      "Credentials",
+      `${state.name} + ${state.email} + ${state.password}`
+    );
+    setState(initialState);
   };
 
   const passwordSecureBtn = () => {
@@ -66,7 +82,15 @@ export default RegistrationScreen = () => {
     setImageLoader(false);
   };
 
-  // useEffect(() => {}, []);
+  if (!isReady) {
+    return (
+      <AppLoading
+        startAsync={loadFonts}
+        onFinish={() => setIsReady(true)}
+        // onError={console.warn("Fonts Error")}
+      />
+    );
+  }
 
   return (
     <View style={styles.whiteBox}>
@@ -77,7 +101,7 @@ export default RegistrationScreen = () => {
           </View>
           <TouchableOpacity
             onPress={handleImageUpload}
-            activeOpacity={0.8}
+            activeOpacity={0.3}
             style={styles.changePhotoBtn}
           >
             <Image
@@ -93,7 +117,7 @@ export default RegistrationScreen = () => {
             <Image source={require("./images/Rectangle_22.png")} />
           </View>
           <TouchableOpacity
-            activeOpacity={0.8}
+            activeOpacity={0.3}
             onPress={handleImageDelete}
             style={styles.changePhotoBtn}
           >
@@ -114,8 +138,8 @@ export default RegistrationScreen = () => {
         <View
           style={{
             ...styles.form,
-            marginBottom: isShowKeyboard ? 2 : 92,
-            marginTop: isShowKeyboard ? 62 : 92,
+            marginBottom: isShowKeyboard ? 2 : 62,
+            marginTop: isShowKeyboard ? 72 : 82,
           }}
         >
           <Text style={styles.title}>Реєстрація</Text>
@@ -123,8 +147,10 @@ export default RegistrationScreen = () => {
             style={styles.input}
             placeholder="Логін"
             placeholderTextColor="#BDBDBD"
-            value={name}
-            onChangeText={(text) => setName(text)}
+            value={state.name}
+            onChangeText={(value) =>
+              setState((prevState) => ({ ...prevState, name: value }))
+            }
             onFocus={() => {
               setIsShowKeyboard(true);
               handleFocus(inputNameRef);
@@ -138,8 +164,10 @@ export default RegistrationScreen = () => {
             style={styles.input}
             placeholder="Адреса електронної пошти"
             placeholderTextColor="#BDBDBD"
-            value={email}
-            onChangeText={(text) => setEmail(text)}
+            value={state.email}
+            onChangeText={(value) =>
+              setState((prevState) => ({ ...prevState, email: value }))
+            }
             onFocus={() => {
               setIsShowKeyboard(true);
               handleFocus(inputEmailRef);
@@ -155,8 +183,10 @@ export default RegistrationScreen = () => {
               placeholder="Пароль"
               placeholderTextColor="#BDBDBD"
               secureTextEntry={secureTextEntry}
-              value={password}
-              onChangeText={(text) => setPassword(text)}
+              value={state.password}
+              onChangeText={(value) =>
+                setState((prevState) => ({ ...prevState, password: value }))
+              }
               onFocus={() => {
                 setIsShowKeyboard(true);
                 handleFocus(inputPassRef);
