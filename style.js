@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
     marginTop: -50,
     color: "#212121",
     textAlign: "center",
-    // fontFamily: "Roboto-Medium",
+    fontFamily: "Roboto-Medium",
     fontSize: 30,
     fontWeight: 500,
   },
@@ -53,6 +53,8 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#F6F6F6",
+    fontFamily: "Roboto-Regular",
+    // fontWeight: 400,
     fontSize: 16,
     lineHeight: 19,
   },
@@ -71,6 +73,7 @@ export const styles = StyleSheet.create({
   btnTitle: {
     color: "#fff",
     fontSize: 16,
+    fontFamily: "Roboto-Regular",
     fontWeight: 400,
   },
 
@@ -83,21 +86,23 @@ export const styles = StyleSheet.create({
   secureBtnTitle: {
     color: "#1B4371",
     fontSize: 16,
-    fontWeight: 400,
+    fontFamily: "Roboto-Regular",
+    // fontWeight: 400,
   },
 
   logRegTogglePageBox: {
     color: "#1B4371",
     fontSize: 16,
-    fontWeight: 400,
-    // paddingBottom: 20,
+    fontFamily: "Roboto-Regular",
+
     alignItems: "center",
   },
 
   logRegTogglePageText: {
     color: "#1B4371",
     fontSize: 16,
-    fontWeight: 400,
+    fontFamily: "Roboto-Regular",
+    // fontWeight: 400,
   },
 
   photoBox: {

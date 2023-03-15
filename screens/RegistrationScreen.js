@@ -9,8 +9,7 @@ import {
   Keyboard,
   Image,
 } from "react-native";
-import { AppLoading } from "expo";
-import * as Font from "expo-font";
+
 import { styles } from "../style";
 
 const initialState = {
@@ -19,20 +18,12 @@ const initialState = {
   password: "",
 };
 
-const loadFonts = async () => {
-  await Font.loadAsync({
-    "Roboto-Medium": require("../assets/fonts/Roboto-Medium.ttf"),
-    "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
-  });
-};
-
 export default RegistrationScreen = () => {
   const [state, setState] = useState(initialState);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [secureTextEntryName, setSecureTextEntryName] = useState("Показати");
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [imageLoader, setImageLoader] = useState(false);
-  const [isReady, setIsReady] = useState(false);
 
   const inputNameRef = useRef(null);
   const inputEmailRef = useRef(null);
@@ -81,16 +72,6 @@ export default RegistrationScreen = () => {
   const handleImageDelete = () => {
     setImageLoader(false);
   };
-
-  if (!isReady) {
-    return (
-      <AppLoading
-        startAsync={loadFonts}
-        onFinish={() => setIsReady(true)}
-        // onError={console.warn("Fonts Error")}
-      />
-    );
-  }
 
   return (
     <View style={styles.whiteBox}>

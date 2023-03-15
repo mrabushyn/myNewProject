@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import * as Font from "expo-font";
+import React, { useState, useCallback } from "react";
+
 import {
   View,
   ImageBackground,
@@ -8,23 +8,23 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import { AppLoading } from "expo";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 
 import RegistrationScreen from "./screens/RegistrationScreen";
 import LoginScreen from "./screens/LoginScreen";
 import { styles } from "./style";
 
-const loadApplication = async () => {
-  await Font.loadAsync({
-    "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
-    "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
-  });
-};
+SplashScreen.preventAutoHideAsync();
 
 export default App = () => {
   const [registerLoginToggle, setRegisterLoginToggle] = useState(true);
-  const [isReady, setIsReady] = useState(false);
+
+  const [fontsLoaded] = useFonts({
+    "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
+    "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
+  });
 
   const changePage = () => {
     if (registerLoginToggle) {
@@ -32,19 +32,19 @@ export default App = () => {
     } else setRegisterLoginToggle(true);
   };
 
-  if (!isReady) {
-    return (
-      <AppLoading
-        startAsync={loadApplication}
-        onFinish={() => setIsReady(true)}
-        // onError={console.warn("Fonts Error")}
-      />
-    );
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
   }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
+      <View style={styles.container} onLayout={onLayoutRootView}>
         <ImageBackground
           style={styles.image}
           source={require("./screens/images/BG.jpg")}
