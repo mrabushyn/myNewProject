@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Roboto-Medium",
     fontSize: 30,
-    fontWeight: 500,
+    // fontWeight: 500,
   },
 
   input: {
@@ -74,7 +74,7 @@ export const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontFamily: "Roboto-Regular",
-    fontWeight: 400,
+    // fontWeight: 400,
   },
 
   secureBtn: {
