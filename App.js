@@ -3,7 +3,11 @@
 // }
 
 import React, { useState, useCallback } from "react";
-
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
 import {
   View,
   ImageBackground,
@@ -12,12 +16,9 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
 
-import RegistrationScreen from "./screens/RegistrationScreen";
-import LoginScreen from "./screens/LoginScreen";
+import RegistrationScreen from "./src/screens/auth/RegistrationScreen";
+import LoginScreen from "./src/screens/auth/LoginScreen";
 import { styles } from "./style";
 
 SplashScreen.preventAutoHideAsync();
@@ -47,24 +48,25 @@ export default App = () => {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container} onLayout={onLayoutRootView}>
-        <ImageBackground
-          style={styles.image}
-          source={require("./screens/images/BG.jpg")}
-        >
-          {registerLoginToggle ? <RegistrationScreen /> : <LoginScreen />}
+    <NavigationContainer>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container} onLayout={onLayoutRootView}>
+          <ImageBackground
+            style={styles.image}
+            source={require("./src/images/BG.jpg")}
+          >
+            {registerLoginToggle ? <RegistrationScreen /> : <LoginScreen />}
 
-          <TouchableOpacity onPress={changePage} style={styles.navigate}>
-            <Image
-              style={{ ...styles.changeIconBtn, width: 50, height: 50 }}
-              source={require("./screens/images/Nav.png")}
-            />
-          </TouchableOpacity>
-
-          <StatusBar style="auto" />
-        </ImageBackground>
-      </View>
-    </TouchableWithoutFeedback>
+            <TouchableOpacity onPress={changePage} style={styles.navigate}>
+              <Image
+                style={{ ...styles.changeIconBtn, width: 50, height: 50 }}
+                source={require("./src/images/Nav.png")}
+              />
+            </TouchableOpacity>
+            <StatusBar style="auto" />
+          </ImageBackground>
+        </View>
+      </TouchableWithoutFeedback>
+    </NavigationContainer>
   );
 };

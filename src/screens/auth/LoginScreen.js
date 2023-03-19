@@ -9,7 +9,7 @@ import {
   Keyboard,
 } from "react-native";
 
-import { styles } from "../style";
+import { styles } from "./styleAuth";
 
 const initialState = {
   email: "",

@@ -10,7 +10,7 @@ import {
   Image,
 } from "react-native";
 
-import { styles } from "../style";
+import { styles } from "./styleAuth";
 
 const initialState = {
   name: "",
@@ -78,7 +78,7 @@ export default RegistrationScreen = () => {
       {!imageLoader && (
         <>
           <View style={styles.photoBox}>
-            <Image source={require("./images/Empty.png")} />
+            <Image source={require("../../images/Empty.png")} />
           </View>
           <TouchableOpacity
             onPress={handleImageUpload}
@@ -87,7 +87,7 @@ export default RegistrationScreen = () => {
           >
             <Image
               style={{ ...styles.changeIconBtn, width: 25, height: 25 }}
-              source={require("../screens/images/addPhoto.png")}
+              source={require("../../images/addPhoto.png")}
             />
           </TouchableOpacity>
         </>
@@ -95,7 +95,7 @@ export default RegistrationScreen = () => {
       {imageLoader && (
         <>
           <View style={styles.photoBox}>
-            <Image source={require("./images/Rectangle_22.png")} />
+            <Image source={require("../../images/Rectangle_22.png")} />
           </View>
           <TouchableOpacity
             activeOpacity={0.3}
@@ -108,7 +108,7 @@ export default RegistrationScreen = () => {
                 width: 25,
                 height: 25,
               }}
-              source={require("../screens/images/3.png")}
+              source={require("../../images/3.png")}
             />
           </TouchableOpacity>
         </>
