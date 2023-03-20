@@ -1,12 +1,15 @@
 import React, { useState, useRef } from "react";
 import {
-  Text,
-  View,
-  TextInput,
+  // TouchableWithoutFeedback,
   KeyboardAvoidingView,
+  // ImageBackground,
+  Keyboard,
+  View,
+  Text,
+  TextInput,
   Alert,
   TouchableOpacity,
-  Keyboard,
+  Platform,
 } from "react-native";
 
 import { styles } from "./styleAuth";
@@ -16,7 +19,7 @@ const initialState = {
   password: "",
 };
 
-export default LoginScreen = () => {
+export default LoginScreen = ({ navigation }) => {
   const [state, setState] = useState(initialState);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [secureTextEntryName, setSecureTextEntryName] = useState("Показати");
@@ -59,6 +62,11 @@ export default LoginScreen = () => {
   });
 
   return (
+    // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    //   <ImageBackground
+    //     style={styles.image}
+    //     source={require("../../images/BG.jpg")}
+    //   >
     <View style={styles.whiteBox}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "android" ? "padding" : "height"}
@@ -96,7 +104,10 @@ export default LoginScreen = () => {
               secureTextEntry={secureTextEntry}
               value={state.password}
               onChangeText={(value) =>
-                setState((prevState) => ({ ...prevState, password: value }))
+                setState((prevState) => ({
+                  ...prevState,
+                  password: value,
+                }))
               }
               onFocus={() => {
                 setIsShowKeyboard(true);
@@ -125,8 +136,12 @@ export default LoginScreen = () => {
                 <Text style={styles.btnTitle}>Увійти</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={{ ...styles.logRegTogglePageBox, paddingBottom: 20 }}
+                style={{
+                  ...styles.logRegTogglePageBox,
+                  paddingBottom: 20,
+                }}
                 activeOpacity={0.7}
+                onPress={() => navigation.navigate("Registration")}
               >
                 <Text style={styles.logRegTogglePageText}>
                   Немає акаунту? Зареєструватися
@@ -137,5 +152,7 @@ export default LoginScreen = () => {
         </View>
       </KeyboardAvoidingView>
     </View>
+    //   </ImageBackground>
+    // </TouchableWithoutFeedback>
   );
 };

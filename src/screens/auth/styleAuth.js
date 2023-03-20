@@ -4,12 +4,12 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
-    flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
   },
 
   whiteBox: {
+    flex: 1,
     position: "absolute",
     bottom: 0,
     width: "100%",

@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import {
+  // TouchableWithoutFeedback,
+  // ImageBackground,
   Text,
   View,
   TextInput,
@@ -8,6 +10,7 @@ import {
   TouchableOpacity,
   Keyboard,
   Image,
+  Platform,
 } from "react-native";
 
 import { styles } from "./styleAuth";
@@ -18,7 +21,7 @@ const initialState = {
   password: "",
 };
 
-export default RegistrationScreen = () => {
+export default RegistrationScreen = ({ navigation }) => {
   const [state, setState] = useState(initialState);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [secureTextEntryName, setSecureTextEntryName] = useState("Показати");
@@ -74,6 +77,11 @@ export default RegistrationScreen = () => {
   };
 
   return (
+    // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    //   <ImageBackground
+    //     style={styles.image}
+    //     source={require("../../images/BG.jpg")}
+    //   >
     <View style={styles.whiteBox}>
       {!imageLoader && (
         <>
@@ -166,7 +174,10 @@ export default RegistrationScreen = () => {
               secureTextEntry={secureTextEntry}
               value={state.password}
               onChangeText={(value) =>
-                setState((prevState) => ({ ...prevState, password: value }))
+                setState((prevState) => ({
+                  ...prevState,
+                  password: value,
+                }))
               }
               onFocus={() => {
                 setIsShowKeyboard(true);
@@ -197,6 +208,7 @@ export default RegistrationScreen = () => {
               <TouchableOpacity
                 style={styles.logRegTogglePageBox}
                 activeOpacity={0.7}
+                onPress={() => navigation.navigate("Login")}
               >
                 <Text style={styles.logRegTogglePageText}>
                   Вже є акаунт? Увійти
@@ -207,5 +219,7 @@ export default RegistrationScreen = () => {
         </View>
       </KeyboardAvoidingView>
     </View>
+    //   </ImageBackground>
+    // </TouchableWithoutFeedback>
   );
 };

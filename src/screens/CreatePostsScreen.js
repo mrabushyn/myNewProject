@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-export default PostsScreen = () => {
+export default CreatePostsScreen = () => {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>PostsScreen</Text>
+      <Text> CreatePostsScreen </Text>
     </View>
   );
 };
