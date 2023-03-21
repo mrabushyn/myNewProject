@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import {
   // TouchableWithoutFeedback,
   // ImageBackground,
@@ -13,6 +13,7 @@ import {
   Platform,
 } from "react-native";
 
+import { IsAuthContext } from "../../../App";
 import { styles } from "./styleAuth";
 
 const initialState = {
@@ -32,6 +33,8 @@ export default RegistrationScreen = ({ navigation }) => {
   const inputEmailRef = useRef(null);
   const inputPassRef = useRef(null);
 
+  const { isAuth, setIsAuth } = useContext(IsAuthContext);
+
   const handleFocus = (ref) => {
     ref.current.setNativeProps({
       style: { ...styles.input, borderColor: "#FF6C00" },
@@ -50,6 +53,8 @@ export default RegistrationScreen = ({ navigation }) => {
       `${state.name} + ${state.email} + ${state.password}`
     );
     setState(initialState);
+    setIsAuth({});
+    // navigation.navigate("Home");
   };
 
   const passwordSecureBtn = () => {

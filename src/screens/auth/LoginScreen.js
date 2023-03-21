@@ -1,8 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, createContext, useContext } from "react";
 import {
-  // TouchableWithoutFeedback,
   KeyboardAvoidingView,
-  // ImageBackground,
   Keyboard,
   View,
   Text,
@@ -11,7 +9,7 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-
+import { IsAuthContext } from "../../../App";
 import { styles } from "./styleAuth";
 
 const initialState = {
@@ -28,6 +26,8 @@ export default LoginScreen = ({ navigation }) => {
   const inputEmailRef = useRef(null);
   const inputPassRef = useRef(null);
 
+  const { isAuth, setIsAuth } = useContext(IsAuthContext);
+
   const handleFocus = (ref) => {
     ref.current.setNativeProps({
       style: { ...styles.input, borderColor: "#FF6C00" },
@@ -43,6 +43,8 @@ export default LoginScreen = ({ navigation }) => {
   const onLogin = () => {
     Alert.alert("Credentials", `${state.email} + ${state.password}`);
     setState(initialState);
+    setIsAuth({});
+    // navigation.navigate("Home");
   };
 
   const passwordSecureBtn = () => {
@@ -62,11 +64,6 @@ export default LoginScreen = ({ navigation }) => {
   });
 
   return (
-    // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-    //   <ImageBackground
-    //     style={styles.image}
-    //     source={require("../../images/BG.jpg")}
-    //   >
     <View style={styles.whiteBox}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "android" ? "padding" : "height"}
@@ -152,7 +149,5 @@ export default LoginScreen = ({ navigation }) => {
         </View>
       </KeyboardAvoidingView>
     </View>
-    //   </ImageBackground>
-    // </TouchableWithoutFeedback>
   );
 };
