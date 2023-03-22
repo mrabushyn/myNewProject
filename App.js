@@ -29,6 +29,7 @@ export default App = () => {
   const [fontsLoaded] = useFonts({
     "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
     "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
+    "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -61,11 +62,6 @@ export default App = () => {
                   <AuthStack.Screen
                     name="Registration"
                     component={RegistrationScreen}
-                    options={{ headerShown: false }}
-                  />
-                  <AuthStack.Screen
-                    name="Home"
-                    component={Home}
                     options={{ headerShown: false }}
                   />
                 </AuthStack.Navigator>
