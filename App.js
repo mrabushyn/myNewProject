@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   ImageBackground,
   Keyboard,
+  KeyboardAvoidingView,
 } from "react-native";
 
 import RegistrationScreen from "./src/screens/auth/RegistrationScreen";
@@ -25,7 +26,7 @@ const MainStack = createStackNavigator();
 export const IsAuthContext = createContext(null);
 
 export default App = () => {
-  const [isAuth, setIsAuth] = useState(null);
+  const [isAuth, setIsAuth] = useState(true);
   const [fontsLoaded] = useFonts({
     "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
     "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
@@ -43,42 +44,47 @@ export default App = () => {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View onLayout={onLayoutRootView} style={styles.container}>
-        <ImageBackground
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={{ flex: 1 }}>
+      <View onLayout={onLayoutRootView} style={{ flex: 1 }}>
+        {/* <ImageBackground
           style={styles.image}
           resizeMode="cover"
           source={require("./src/images/PhotoBG.jpg")}
         >
-          <IsAuthContext.Provider value={{ isAuth, setIsAuth }}>
-            <NavigationContainer>
-              {!isAuth && (
-                <AuthStack.Navigator>
-                  <AuthStack.Screen
-                    name="Login"
-                    component={LoginScreen}
-                    options={{ headerShown: false }}
-                  />
-                  <AuthStack.Screen
-                    name="Registration"
-                    component={RegistrationScreen}
-                    options={{ headerShown: false }}
-                  />
-                </AuthStack.Navigator>
-              )}
-              {isAuth && (
-                <MainStack.Navigator>
-                  <MainStack.Screen
-                    name="Home"
-                    component={Home}
-                    options={{ headerShown: false }}
-                  />
-                </MainStack.Navigator>
-              )}
-            </NavigationContainer>
-          </IsAuthContext.Provider>
-          <StatusBar style="auto" />
-        </ImageBackground>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "android" ? "padding" : "height"}
+            style={{ flex: 1 }}
+          > */}
+        <IsAuthContext.Provider value={{ isAuth, setIsAuth }}>
+          <NavigationContainer>
+            {!isAuth && (
+              <AuthStack.Navigator>
+                <AuthStack.Screen
+                  name="Login"
+                  component={LoginScreen}
+                  options={{ headerShown: false }}
+                />
+                <AuthStack.Screen
+                  name="Registration"
+                  component={RegistrationScreen}
+                  options={{ headerShown: false }}
+                />
+              </AuthStack.Navigator>
+            )}
+            {isAuth && (
+              <MainStack.Navigator>
+                <MainStack.Screen
+                  name="Home"
+                  component={Home}
+                  options={{ headerShown: false }}
+                />
+              </MainStack.Navigator>
+            )}
+          </NavigationContainer>
+        </IsAuthContext.Provider>
+        <StatusBar style="auto" />
+        {/* </KeyboardAvoidingView>
+        </ImageBackground> */}
       </View>
     </TouchableWithoutFeedback>
   );

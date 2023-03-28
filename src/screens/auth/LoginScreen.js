@@ -8,6 +8,7 @@ import {
   Alert,
   TouchableOpacity,
   Platform,
+  ImageBackground,
 } from "react-native";
 import { IsAuthContext } from "../../../App";
 import { styles } from "./styleAuth";
@@ -64,90 +65,96 @@ export default LoginScreen = ({ navigation }) => {
   });
 
   return (
-    <View style={styles.whiteBox}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "android" ? "padding" : "height"}
-      >
-        <View
-          style={{
-            ...styles.form,
-            marginBottom: isShowKeyboard ? 32 : 92,
-            marginTop: isShowKeyboard ? 76 : 92,
-          }}
+    <ImageBackground
+      style={styles.image}
+      source={require("../../images/BG.jpg")}
+    >
+      <View style={styles.whiteBox}>
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === "android" ? "padding" : "height"}
         >
-          <Text style={styles.title}>Увійти</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Адреса електронної пошти"
-            placeholderTextColor="#BDBDBD"
-            value={state.email}
-            onChangeText={(value) =>
-              setState((prevState) => ({ ...prevState, email: value }))
-            }
-            onFocus={() => {
-              setIsShowKeyboard(true);
-              handleFocus(inputEmailRef);
+          <View
+            style={{
+              ...styles.form,
+              marginBottom: isShowKeyboard ? 32 : 92,
+              marginTop: isShowKeyboard ? 76 : 92,
             }}
-            onBlur={() => {
-              handleBlur(inputEmailRef);
-            }}
-            ref={inputEmailRef}
-          ></TextInput>
-          <View style={{ paddingBottom: 0 }}>
+          >
+            <Text style={styles.title}>Увійти</Text>
             <TextInput
               style={styles.input}
-              placeholder="Пароль"
+              placeholder="Адреса електронної пошти"
               placeholderTextColor="#BDBDBD"
-              secureTextEntry={secureTextEntry}
-              value={state.password}
+              value={state.email}
               onChangeText={(value) =>
-                setState((prevState) => ({
-                  ...prevState,
-                  password: value,
-                }))
+                setState((prevState) => ({ ...prevState, email: value }))
               }
               onFocus={() => {
                 setIsShowKeyboard(true);
-                handleFocus(inputPassRef);
+                handleFocus(inputEmailRef);
               }}
               onBlur={() => {
-                handleBlur(inputPassRef);
+                handleBlur(inputEmailRef);
               }}
-              ref={inputPassRef}
+              ref={inputEmailRef}
             ></TextInput>
-            <TouchableOpacity
-              style={styles.secureBtn}
-              activeOpacity={0.6}
-              onPress={passwordSecureBtn}
-            >
-              <Text style={styles.secureBtnTitle}>{secureTextEntryName}</Text>
-            </TouchableOpacity>
-          </View>
-          {!isShowKeyboard ? (
-            <>
-              <TouchableOpacity
-                style={{ ...styles.button }}
-                onPress={onLogin}
-                activeOpacity={0.7}
-              >
-                <Text style={styles.btnTitle}>Увійти</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  ...styles.logRegTogglePageBox,
-                  paddingBottom: 20,
+            <View style={{ paddingBottom: 0 }}>
+              <TextInput
+                style={styles.input}
+                placeholder="Пароль"
+                placeholderTextColor="#BDBDBD"
+                secureTextEntry={secureTextEntry}
+                value={state.password}
+                onChangeText={(value) =>
+                  setState((prevState) => ({
+                    ...prevState,
+                    password: value,
+                  }))
+                }
+                onFocus={() => {
+                  setIsShowKeyboard(true);
+                  handleFocus(inputPassRef);
                 }}
-                activeOpacity={0.7}
-                onPress={() => navigation.navigate("Registration")}
+                onBlur={() => {
+                  handleBlur(inputPassRef);
+                }}
+                ref={inputPassRef}
+              ></TextInput>
+              <TouchableOpacity
+                style={styles.secureBtn}
+                activeOpacity={0.6}
+                onPress={passwordSecureBtn}
               >
-                <Text style={styles.logRegTogglePageText}>
-                  Немає акаунту? Зареєструватися
-                </Text>
+                <Text style={styles.secureBtnTitle}>{secureTextEntryName}</Text>
               </TouchableOpacity>
-            </>
-          ) : null}
-        </View>
-      </KeyboardAvoidingView>
-    </View>
+            </View>
+            {!isShowKeyboard ? (
+              <>
+                <TouchableOpacity
+                  style={{ ...styles.button }}
+                  onPress={onLogin}
+                  activeOpacity={0.7}
+                >
+                  <Text style={styles.btnTitle}>Увійти</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    ...styles.logRegTogglePageBox,
+                    paddingBottom: 20,
+                  }}
+                  activeOpacity={0.7}
+                  onPress={() => navigation.navigate("Registration")}
+                >
+                  <Text style={styles.logRegTogglePageText}>
+                    Немає акаунту? Зареєструватися
+                  </Text>
+                </TouchableOpacity>
+              </>
+            ) : null}
+          </View>
+        </KeyboardAvoidingView>
+      </View>
+    </ImageBackground>
   );
 };

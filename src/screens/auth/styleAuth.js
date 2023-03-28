@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
+    flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
   },
