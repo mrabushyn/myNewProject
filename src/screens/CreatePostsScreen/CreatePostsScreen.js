@@ -7,6 +7,8 @@ import {
   TextInput,
   KeyboardAvoidingView,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
 import { styles } from "./CreatePostsStyle";
 
 export default CreatePostsScreen = () => {
@@ -25,7 +27,10 @@ export default CreatePostsScreen = () => {
                 source={require("../../images/Content_Block.png")}
                 style={styles.postImage}
               />
-              <TouchableOpacity style={styles.loadImgBtnContainer}>
+              <TouchableOpacity
+                style={styles.loadImgBtnContainer}
+                onPress={() => setPublish(false)}
+              >
                 <Image
                   source={require("../../images/Group_1.png")}
                   style={styles.loadImgBtn}
@@ -99,7 +104,10 @@ export default CreatePostsScreen = () => {
                 source={require("../../images/Rectangle_23.png")}
                 style={styles.postImage}
               />
-              <TouchableOpacity style={styles.loadImgBtnContainer}>
+              <TouchableOpacity
+                style={styles.loadImgBtnContainer}
+                onPress={() => setPublish(true)}
+              >
                 <Image
                   source={require("../../images/Group_1.png")}
                   style={{ ...styles.loadImgBtn, opacity: 0.3 }}
@@ -186,6 +194,11 @@ export default CreatePostsScreen = () => {
             </View>
           </>
         )}
+        <View style={styles.centerButtonContainer}>
+          <TouchableOpacity style={styles.centerBtn} activeOpacity={0.7}>
+            <Ionicons name="trash-outline" size={24} color="#DADADA" />
+          </TouchableOpacity>
+        </View>
       </View>
     </KeyboardAvoidingView>
   );

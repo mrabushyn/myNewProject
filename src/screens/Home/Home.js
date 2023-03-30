@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { TouchableOpacity, Image, StyleSheet } from "react-native";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -7,16 +8,34 @@ import CreatePostsScreen from "../CreatePostsScreen/CreatePostsScreen";
 import PostsScreen from "../PostsScreen/PostsScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
 import { IsAuthContext } from "../../../App";
+import { ScrollPositionContext } from "../../screens/ProfileScreen/ProfileScreen";
 
 const Tabs = createBottomTabNavigator();
-export default Home = () => {
+
+export default Home = ({ navigation }) => {
   const { isAuth, setIsAuth } = useContext(IsAuthContext);
+  // const scrollPosition = useContext(ScrollPositionContext);
+  // const [position, setPosition] = useState(scrollPosition);
+  // // console.log("ScrollPositionContext", ScrollPositionContext._currentValue);
+  // console.log("scrollPosition", scrollPosition);
+  // // let position = ScrollPositionContext._currentValue;
+  // console.log("position", position);
+  // useEffect(() => {
+  //   // код для виконання при зміні компонента
+  //   console.log("scrollPosition", scrollPosition);
+
+  //   return () => {
+  //     // код для очищення після зміни компонента
+  //   };
+  // }, [ScrollPositionContext, scrollPosition]);
   return (
     <Tabs.Navigator
       screenOptions={({ route }) => ({
         tabBarShowLabel: false,
         tabBarActiveTintColor: "#212121",
         tabBarInactiveTintColor: "#212121",
+        // tabBarActiveBackgroundColor: "#fff",
+        // tabBarInactiveBackgroundColor: "#ff0",
         tabBarPressOpacity: 0.2,
         tabBarScrollEnabled: true,
         tabBarStyle: {
@@ -28,25 +47,19 @@ export default Home = () => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           let styleName;
-          let currentRouteName = route.name;
-          // console.log("focused", focused);
 
           if (route.name === "PostsScreen") {
-            iconName = "grid-outline";
+            iconName = focused ? "grid-outline" : "grid-outline";
+            // console.log(route);
           }
           if (route.name === "CreatePostsScreen") {
+            iconName = focused ? "person-outline" : "add";
             styleName = styles.centerBtn;
-            iconName = focused ? "add" : "add";
           }
           if (route.name === "ProfileScreen") {
-            // iconName = focused
-            //   ? (styleName = styles.active)
-            //   : (styleName = styles.inactive);
-
             iconName = focused ? "add" : "person-outline";
           }
-          // console.log("navigate", iconName);
-          console.log("currentRouteName", currentRouteName);
+
           return (
             <Ionicons
               name={iconName}
@@ -80,6 +93,7 @@ export default Home = () => {
             textAlign: "center",
           },
           headerTitleAlign: "center",
+
           headerRight: () => (
             <TouchableOpacity
               onPress={() => setIsAuth(null)}
@@ -93,42 +107,15 @@ export default Home = () => {
               />
             </TouchableOpacity>
           ),
-          // tabBarIcon: ({ focused, color, size }) => {
-          //   let iconName;
-          //   let styleName;
-          //   console.log("PostsScreen", route);
-
-          //   if (route.name === "PostsScreen") {
-          //     iconName = focused
-          //       ? route.name === "CreatePostsScreen"
-          //       : route.name === "PostsScreen";
-          //     iconName = focused ? "grid-outline" : "add";
-          //   }
-          //   if (route.name === "CreatePostsScreen") {
-          //     styleName = styles.centerBtn;
-          //     iconName = focused ? "add" : "person-outline";
-          //   }
-          //   if (route.name === "ProfileScreen") {
-          //     // iconName = focused
-          //     //   ? (styleName = styles.active)
-          //     //   : (styleName = styles.inactive);
-          //     iconName = focused ? "person-outline" : "add";
-          //   }
-          //   return (
-          //     <Ionicons
-          //       name={iconName}
-          //       size={size}
-          //       color={color}
-          //       style={styleName}
-          //     />
-          //   );
-          // },
         })}
       />
       <Tabs.Screen
         name="CreatePostsScreen"
         component={CreatePostsScreen}
         options={({ route }) => ({
+          tabBarStyle: {
+            display: "none",
+          },
           title: "Створити публікацію",
           headerStyle: {
             backgroundColor: "#fff",
@@ -146,43 +133,20 @@ export default Home = () => {
             textAlign: "center",
           },
           headerTitleAlign: "center",
-          headerBackImage: () => (
-            <Image
-              source={require("../../images/log-out.png")}
-              style={{ width: 20, height: 20 }}
-            />
-          ),
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-            let styleName;
-            // console.log("CreatePostsScreen", route.name);
-            // console.log("iconName", iconName);
-
-            // if (route.name === "PostsScreen") {
-            //   iconName = focused ? "grid-outline" : "add";
-            // }
-            if (route.name === "CreatePostsScreen") {
-              styleName = styles.centerBtn;
-              iconName = "add";
-              console.log("CreatePostsScreen", route.name);
-
-              console.log("iconName", iconName);
-            }
-            if (route.name == "ProfileScreen") {
-              iconName = "person-outline";
-              console.log("!!!!!!!!iconName", iconName);
-            }
-            return (
+          headerLeft: () => (
+            <TouchableOpacity>
               <Ionicons
-                name={iconName}
-                size={size}
-                color={color}
-                style={styleName}
+                name="arrow-back"
+                size={24}
+                color="#212121"
+                style={{ marginLeft: 20 }}
+                onPress={() => navigation.goBack()}
               />
-            );
-          },
+            </TouchableOpacity>
+          ),
         })}
       />
+
       <Tabs.Screen
         name="ProfileScreen"
         component={ProfileScreen}
@@ -191,24 +155,14 @@ export default Home = () => {
           //   <Ionicons name="person-outline" size={size} color={color} />
           // ),
           headerShown: false,
+          tabBarStyle: { transform: [{ translateY: position }] },
         }}
-      />
+      ></Tabs.Screen>
     </Tabs.Navigator>
-
-    // <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    //   <TouchableOpacity>
-    //     <Text>Home</Text>
-    //   </TouchableOpacity>
-    // </View>
   );
 };
 
 const styles = StyleSheet.create({
-  // tabBarStyle: {
-  //   height: 83,
-  //   paddingLeft: "12%",
-  //   paddingRight: "12%",
-  // },
   tab: {
     flex: 1,
     alignItems: "center",

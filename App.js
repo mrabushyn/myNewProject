@@ -21,7 +21,7 @@ import { styles } from "./style";
 SplashScreen.preventAutoHideAsync();
 
 const AuthStack = createStackNavigator();
-const MainStack = createStackNavigator();
+const TabStack = createStackNavigator();
 
 export const IsAuthContext = createContext(null);
 
@@ -72,13 +72,13 @@ export default App = () => {
               </AuthStack.Navigator>
             )}
             {isAuth && (
-              <MainStack.Navigator>
-                <MainStack.Screen
+              <TabStack.Navigator>
+                <TabStack.Screen
                   name="Home"
                   component={Home}
                   options={{ headerShown: false }}
                 />
-              </MainStack.Navigator>
+              </TabStack.Navigator>
             )}
           </NavigationContainer>
         </IsAuthContext.Provider>

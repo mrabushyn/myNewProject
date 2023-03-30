@@ -91,4 +91,22 @@ export const styles = StyleSheet.create({
     zIndex: 1,
     left: 2,
   },
+
+  centerBtn: {
+    backgroundColor: "#F6F6F6",
+    width: 70,
+    height: 40,
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  centerButtonContainer: {
+    flex: 1,
+    marginBottom: 22,
+    left: "50%",
+    marginLeft: -35,
+    justifyContent: "flex-end",
+    alignContent: "center",
+  },
 });
