@@ -155,7 +155,7 @@ export default Home = ({ navigation }) => {
           //   <Ionicons name="person-outline" size={size} color={color} />
           // ),
           headerShown: false,
-          tabBarStyle: { transform: [{ translateY: position }] },
+          tabBarStyle: { transform: [{ translateY: 0 }] },
         }}
       ></Tabs.Screen>
     </Tabs.Navigator>
